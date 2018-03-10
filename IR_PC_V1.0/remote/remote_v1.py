@@ -24,7 +24,7 @@ class TextFrame(wx.Frame):
                 print("发现串口%s"%portname)
                 
         try:
-            #self.ser.port="COM8"
+            self.ser.port="COM8"
             self.ser.open()
             self.ser.close()
             print("打开串口成功:%s"%self.ser.port)
@@ -109,10 +109,22 @@ class TextFrame(wx.Frame):
         self.Btn_IRKEY_PICTURE = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="图像", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_AUDIO = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="声音", size=(buttonwidth, buttonhight))
         
-        self.Remote_Info=wx.TextCtrl(panel, -1,pos=(poswidth,(poshight+buttonhight)*18+buttonhight),size=(4*buttonwidth, 3*buttonhight))
+        self.Btn_IRKEY_AV = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*16+buttonhight), label="AV", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_TV = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*16+buttonhight), label="TV", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_VGA = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*16+buttonhight), label="VGA", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_HDMI = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*16+buttonhight), label="HDMI", size=(buttonwidth, buttonhight))        
+        
+        self.Btn_IRKEY_USB = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*17+buttonhight), label="USB", size=(buttonwidth, buttonhight))
+        #self.Btn_IRKEY_TV = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="TV", size=(buttonwidth, buttonhight))
+        #self.Btn_IRKEY_VGA = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="VGA", size=(buttonwidth, buttonhight))
+        #self.Btn_IRKEY_HDMI = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="HDMI", size=(buttonwidth, buttonhight))            
+        
+        
+        
+        self.Remote_Info=wx.TextCtrl(panel, -1,pos=(poswidth,(poshight+buttonhight)*20+buttonhight),size=(4*buttonwidth, 3*buttonhight))
         self.Remote_Info.SetLabelText("www.nop404.com")
         
-        self.Choice_IR_Mode=wx.Choice(panel, -1,pos=(poswidth,(poshight+buttonhight)*17+buttonhight),size=(4*buttonwidth, 3*buttonhight))
+        self.Choice_IR_Mode=wx.Choice(panel, -1,pos=(poswidth,(poshight+buttonhight)*19+buttonhight),size=(4*buttonwidth, 3*buttonhight))
         self.Choice_IR_Mode.Append(self.config.sections())
         self.Choice_IR_Mode.SetSelection(0)
         self.Current_IR_Mode=(self.Choice_IR_Mode.GetStringSelection())
@@ -184,8 +196,16 @@ class TextFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_PLAY, self.Btn_IRKEY_PLAY)
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_STOP, self.Btn_IRKEY_STOP)
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_PICTURE, self.Btn_IRKEY_PICTURE)
-        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_AUDIO, self.Btn_IRKEY_AUDIO)        
-
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_AUDIO, self.Btn_IRKEY_AUDIO)      
+        
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_AV, self.Btn_IRKEY_AV)
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_TV, self.Btn_IRKEY_TV)
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_VGA, self.Btn_IRKEY_VGA)
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_HDMI, self.Btn_IRKEY_HDMI)   
+        
+        self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_USB, self.Btn_IRKEY_USB)   
+        
+    
      
     def Event_IR_Mode(self,event):
         self.Current_IR_Mode=(self.Choice_IR_Mode.GetStringSelection())
@@ -297,7 +317,17 @@ class TextFrame(wx.Frame):
     def Event_IRKEY_AUDIO(self, event):
         self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_AUDIO")           
         
+    def Event_IRKEY_AV(self, event):
+        self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_AV") 
+    def Event_IRKEY_TV(self, event):
+        self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_TV") 
+    def Event_IRKEY_VGA(self, event):
+        self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_VGA")   
+    def Event_IRKEY_HDMI(self, event):
+        self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_HDMI")    
         
+    def Event_IRKEY_USB(self, event):
+        self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_USB")           
    
     
     def Send_IRKEY(self,remotename,irkeyname):
