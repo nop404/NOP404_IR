@@ -8,7 +8,7 @@ import time
 global_ser=serial.Serial()
 class TextFrame(wx.Frame):
     def __init__(self):
-        wx.Frame.__init__(self,None,-1,"NOP404_IR V1.0",size=(300,900))
+        wx.Frame.__init__(self,None,-1,"NOP404_IR V1.0",size=(300,1280))
         panel=wx.Panel(self,-1)
         
         self.ser=global_ser;
@@ -115,22 +115,29 @@ class TextFrame(wx.Frame):
         self.Btn_IRKEY_HDMI = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*16+buttonhight), label="HDMI", size=(buttonwidth, buttonhight))        
         
         self.Btn_IRKEY_USB = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*17+buttonhight), label="USB", size=(buttonwidth, buttonhight))
-        #self.Btn_IRKEY_TV = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="TV", size=(buttonwidth, buttonhight))
-        #self.Btn_IRKEY_VGA = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="VGA", size=(buttonwidth, buttonhight))
-        #self.Btn_IRKEY_HDMI = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*17+buttonhight), label="HDMI", size=(buttonwidth, buttonhight))            
+        
+        self.Btn_KEY_K0 = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*18+buttonhight), label="K0", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K1 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*18+buttonhight), label="K1", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K2 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*18+buttonhight), label="K2", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K3 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*18+buttonhight), label="K3", size=(buttonwidth, buttonhight))            
+        
+        self.Btn_KEY_K4 = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*19+buttonhight), label="K4", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K5 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*19+buttonhight), label="k5", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K6 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*19+buttonhight), label="K6", size=(buttonwidth, buttonhight))
+        self.Btn_KEY_K7 = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*19+buttonhight), label="K7", size=(buttonwidth, buttonhight))              
         
         
         
-        self.Remote_Info=wx.TextCtrl(panel, -1,pos=(poswidth,(poshight+buttonhight)*20+buttonhight),size=(4*buttonwidth, 3*buttonhight))
-        self.Remote_Info.SetLabelText("www.nop404.com")
-        
-        self.Choice_IR_Mode=wx.Choice(panel, -1,pos=(poswidth,(poshight+buttonhight)*19+buttonhight),size=(4*buttonwidth, 3*buttonhight))
+        self.Choice_IR_Mode=wx.Choice(panel, -1,pos=(poswidth,(poshight+buttonhight)*21+buttonhight),size=(4*buttonwidth, 3*buttonhight))
         self.Choice_IR_Mode.Append(self.config.sections())
         self.Choice_IR_Mode.SetSelection(0)
         self.Current_IR_Mode=(self.Choice_IR_Mode.GetStringSelection())
         self.Bind(wx.EVT_CHOICE,self.Event_IR_Mode,self.Choice_IR_Mode)
         
-
+       # self.Remote_Info=wx.TextCtrl(panel, -1,pos=(poswidth,(poshight+buttonhight)*20+buttonhight),size=(4*buttonwidth, 3*buttonhight))
+       # self.Remote_Info.SetLabelText("www.nop404.com")
+        
+        
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_POWER, self.Btn_IRKEY_POWER)
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_MUTE, self.Btn_IRKEY_MUTE)
 
@@ -204,6 +211,17 @@ class TextFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_HDMI, self.Btn_IRKEY_HDMI)   
         
         self.Bind(wx.EVT_BUTTON, self.Event_IRKEY_USB, self.Btn_IRKEY_USB)   
+        
+        
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K0, self.Btn_KEY_K0) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K1, self.Btn_KEY_K1) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K2, self.Btn_KEY_K2) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K3, self.Btn_KEY_K3) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K4, self.Btn_KEY_K4) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K5, self.Btn_KEY_K5) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K6, self.Btn_KEY_K6) 
+        self.Bind(wx.EVT_BUTTON, self.Event_KEY_K7, self.Btn_KEY_K7) 
+        
         
     
      
@@ -329,6 +347,36 @@ class TextFrame(wx.Frame):
     def Event_IRKEY_USB(self, event):
         self.Send_IRKEY(self.Current_IR_Mode,"IRKEY_USB")           
    
+   
+    def Event_KEY_K0(self, event):
+        self.Send_KEY("0")  
+    def Event_KEY_K1(self, event):
+        self.Send_KEY("1") 
+    def Event_KEY_K2(self, event):
+        self.Send_KEY("2") 
+    def Event_KEY_K3(self, event):
+        self.Send_KEY("3") 
+    def Event_KEY_K4(self, event):
+        self.Send_KEY("4") 
+    def Event_KEY_K5(self, event):
+        self.Send_KEY("5") 
+    def Event_KEY_K6(self, event):
+        self.Send_KEY("6") 
+    def Event_KEY_K7(self, event):
+        self.Send_KEY("7") 
+
+        
+        
+    def Send_KEY(self,keyname):
+        if(self.ser.isOpen()==False):
+            self.ser.open()
+        try:
+            tmp=keyname.encode();
+        except:
+            print("ªÒ»°≈‰÷√ ß∞‹:"+keyname)
+        tmp+=('\n'.encode())
+        self.ser.write(tmp)  
+       
     
     def Send_IRKEY(self,remotename,irkeyname):
         if(self.ser.isOpen()==False):
