@@ -74,48 +74,48 @@ void loop() {
       pinMode(A3, INPUT);
       pinMode(A4, INPUT);
       pinMode(A5, INPUT);
-      pinMode(A6, INPUT);
-      pinMode(A7, INPUT);
+      pinMode(6, INPUT);
+      pinMode(7, INPUT);
       switch (inputString[0]) {
         case '0':
-          pinMode(A6, OUTPUT);
-          digitalWrite(A6, LOW);
+          pinMode(7, OUTPUT);
+          digitalWrite(7, LOW);
           Serial.println("K0");
           break;
         case '1':
-          pinMode(A5, OUTPUT);
-          digitalWrite(A5, LOW);
+          pinMode(6, OUTPUT);
+          digitalWrite(6, LOW);
           Serial.println("K1");
           break;
 
         case '2':
-          pinMode(A4, OUTPUT);
-          digitalWrite(A4, LOW);
+          pinMode(A5, OUTPUT);
+          digitalWrite(A5, LOW);
           Serial.println("K2");
           break;
         case '3':
-          pinMode(A3, OUTPUT);
-          digitalWrite(A3, LOW);
+          pinMode(A4, OUTPUT);
+          digitalWrite(A4, LOW);
           Serial.println("K3");
           break;
         case '4':
-          pinMode(A2, OUTPUT);
-          digitalWrite(A2, LOW);
+          pinMode(A3, OUTPUT);
+          digitalWrite(A3, LOW);
           Serial.println("K4");
           break;
         case '5':
-          pinMode(A1, OUTPUT);
-          digitalWrite(A1, LOW);
+          pinMode(A2, OUTPUT);
+          digitalWrite(A2, LOW);
           Serial.println("K5");
           break;
         case '6':
-          pinMode(A0, OUTPUT);
-          digitalWrite(A0, LOW);
+          pinMode(A1, OUTPUT);
+          digitalWrite(A1, LOW);
           Serial.println("K6");
           break;
         case '7':
-          pinMode(A7, OUTPUT);
-          digitalWrite(A7, LOW);
+          pinMode(A0, OUTPUT);
+          digitalWrite(A0, LOW);
           Serial.println("NULL");
           break;
         default:
@@ -125,14 +125,24 @@ void loop() {
           pinMode(A3, INPUT);
           pinMode(A4, INPUT);
           pinMode(A5, INPUT);
-          pinMode(A6, INPUT);
-          pinMode(A7, INPUT);
+          pinMode(6, INPUT);
+          pinMode(7, INPUT);
           break;
       }
+       delay(500);
+          pinMode(A0, INPUT);
+          pinMode(A1, INPUT);
+          pinMode(A2, INPUT);
+          pinMode(A3, INPUT);
+          pinMode(A4, INPUT);
+          pinMode(A5, INPUT);
+          pinMode(6, INPUT);
+          pinMode(7, INPUT);
+          
       inputString = "";
       stringComplete = false;
     }
-    else if (inputString.length()>2)
+    else if (inputString.length()==7)
     {
       datalen = inputString.length() - 1;
       Serial.println(datalen);
@@ -161,7 +171,12 @@ void loop() {
       inputString = "";
 
       stringComplete = false;
-    }
+    }else {
+       remotecode = 0;
+      inputString = "";
+       Serial.println("Data Error");
+        stringComplete = false;
+      }
   }
 }
 
@@ -180,6 +195,7 @@ void serialEvent() {
     inputString += inChar;
     // if the incoming character is a newline, set a flag so the main loop can
     // do something about it:
+     Serial.println(inputString);
     if (inChar == '\n') {
       stringComplete = true;
     }
