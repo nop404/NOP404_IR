@@ -19,17 +19,17 @@ class TextFrame(wx.Frame):
             print(portname)
             print(desc)
             print(hwid)
-            if(hwid=="USB VID:PID=1A86:7523 SER=5 LOCATION=1-2"):#自动查找串口
+            if(hwid=="USB VID:PID=1A86:7523 SER=5 LOCATION=1-2"):#auto search COM
                 self.ser.port=portname
-                print("发现串口%s"%portname)
+                print("find com %s"%portname)
                 
         try:
-            self.ser.port="COM8"
+            self.ser.port="COM3"
             self.ser.open()
             self.ser.close()
-            print("打开串口成功:%s"%self.ser.port)
+            print("open success:%s"%self.ser.port)
         except:
-            print("打开串口失败:%s"%self.ser.port)
+            print("open fail:%s"%self.ser.port)
         self.config = configparser.ConfigParser()
         self.config.read('remote.ini')        
         print(self.config.sections());
@@ -38,8 +38,8 @@ class TextFrame(wx.Frame):
         buttonwidth=60
         buttonhight=30
         self.Current_IR_Mode=""
-        self.Btn_IRKEY_POWER = wx.Button(panel, -1, pos=(poswidth,poshight), label="电源", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_MUTE = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,poshight), label="静音", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_POWER = wx.Button(panel, -1, pos=(poswidth,poshight), label="Power", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_MUTE = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,poshight), label="Mute", size=(buttonwidth, buttonhight))
 
         self.Btn_IRKEY_NUM_1 = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*1+buttonhight), label="1", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_NUM_2= wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*1+buttonhight), label="2", size=(buttonwidth, buttonhight))
@@ -56,58 +56,58 @@ class TextFrame(wx.Frame):
         self.Btn_IRKEY_NUM_9 = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*3+buttonhight), label="9", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_CHANNEL_FAV_LIST = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*4+buttonhight), label="喜爱", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_CHANNEL_FAV_LIST = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*4+buttonhight), label="Fav", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_NUM_0 = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*4+buttonhight), label="0", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_CHANNEL_RETURN = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*4+buttonhight), label="回看", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_CHANNEL_RETURN = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*4+buttonhight), label="Return", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_SLEEP = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*5+buttonhight), label="睡眠", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_PC    = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*5+buttonhight), label="电脑", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_HDMI  = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*5+buttonhight), label="高清", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_SLEEP = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*5+buttonhight), label="Sleep", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_PC    = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*5+buttonhight), label="PC", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_HDMI  = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*5+buttonhight), label="HDMI", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_AUTOADJUST = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*6+buttonhight), label="自动", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_INFO = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*6+buttonhight), label="屏显", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_AUTOADJUST = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*6+buttonhight), label="Auto", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_INFO = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*6+buttonhight), label="Info", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_UP = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*7+buttonhight), label="上", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_UP = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*7+buttonhight), label="Up", size=(buttonwidth, buttonhight))
         
 
-        self.Btn_IRKEY_LEFT = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*8+buttonhight), label="左", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_SELECT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*8+buttonhight), label="确认", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_RIGHT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*8+buttonhight), label="右", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_LEFT = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*8+buttonhight), label="Left", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_SELECT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*8+buttonhight), label="OK", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_RIGHT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*8+buttonhight), label="Right", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_DOWN = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*9+buttonhight), label="下", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_DOWN = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*9+buttonhight), label="Dn", size=(buttonwidth, buttonhight))
        
-        self.Btn_IRKEY_MENU = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*10+buttonhight), label="菜单", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_EXIT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*10+buttonhight), label="退出", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_MENU = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*10+buttonhight), label="MENU", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_EXIT = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*10+buttonhight), label="Exit", size=(buttonwidth, buttonhight))
 
         self.Btn_IRKEY_VOLUME_PLUS = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*11+buttonhight), label="VOL+", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_INPUT_SOURCE = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*11+buttonhight), label="输入", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_INPUT_SOURCE = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*11+buttonhight), label="Input", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_CHANNEL_PLUS = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*11+buttonhight), label="CH+", size=(buttonwidth, buttonhight))
 
 
         self.Btn_IRKEY_VOLUME_MINUS = wx.Button(panel, -1, pos=(poswidth,(poshight+buttonhight)*12+buttonhight), label="VOL-", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_ZOOM = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*12+buttonhight), label="缩放", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_ZOOM = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*1+poswidth,(poshight+buttonhight)*12+buttonhight), label="ZOOM", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_CHANNEL_MINUS = wx.Button(panel, -1, pos=((poswidth+buttonwidth)*2+poswidth,(poshight+buttonhight)*12+buttonhight), label="CH-", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_RED = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*13+buttonhight), label="红", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_GREEN = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="绿", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_YELLOW = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="黄", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_BLUE = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="蓝", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_RED = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*13+buttonhight), label="RED", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_GREEN = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="GREEN", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_YELLOW = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="YELLOW", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_BLUE = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*13+buttonhight), label="BLUE", size=(buttonwidth, buttonhight))
 
-        self.Btn_IRKEY_BACKWARD = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*14+buttonhight), label="快退", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_FORWARD  = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label="快进", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_PREVIOUS = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label="上一曲", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_NEXT = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label="下一曲", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_BACKWARD = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*14+buttonhight), label="<<", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_FORWARD  = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label=">>", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_PREVIOUS = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label="|<<", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_NEXT = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*14+buttonhight), label=">>|", size=(buttonwidth, buttonhight))
 
 
-        self.Btn_IRKEY_PLAY = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*15+buttonhight), label="播放", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_STOP = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="停止", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_PICTURE = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="图像", size=(buttonwidth, buttonhight))
-        self.Btn_IRKEY_AUDIO = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="声音", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_PLAY = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*15+buttonhight), label="Play", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_STOP = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="Stop", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_PICTURE = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*2+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="Picture", size=(buttonwidth, buttonhight))
+        self.Btn_IRKEY_AUDIO = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*3+poswidth)*0.75,(poshight+buttonhight)*15+buttonhight), label="Audio", size=(buttonwidth, buttonhight))
         
         self.Btn_IRKEY_AV = wx.Button(panel, -1, pos=(poswidth*0.75,(poshight+buttonhight)*16+buttonhight), label="AV", size=(buttonwidth, buttonhight))
         self.Btn_IRKEY_TV = wx.Button(panel, -1, pos=(((poswidth+buttonwidth)*1+poswidth)*0.75,(poshight+buttonhight)*16+buttonhight), label="TV", size=(buttonwidth, buttonhight))
@@ -373,7 +373,7 @@ class TextFrame(wx.Frame):
         try:
             tmp=keyname.encode();
         except:
-            print("获取配置失败:"+keyname)
+            print("Get Config Fail:"+keyname)
         tmp+=('\n'.encode())
         self.ser.write(tmp)  
        
@@ -382,13 +382,13 @@ class TextFrame(wx.Frame):
         if(self.ser.isOpen()==False):
             self.ser.open()
       
-        #tmp=bytes().fromhex(self.config.get(remotename,irkeyname)) #字符串转换为bytes
+       
         tmp=(self.config.get(remotename,'head_code').encode())
         
         try:
             tmp+=(self.config.get(remotename,irkeyname).encode())
         except:
-            print("获取配置失败:"+irkeyname)
+            print("Get Config Fail:"+irkeyname)
         tmp+=('\n'.encode())
         self.ser.write(tmp)  
         print(irkeyname)
